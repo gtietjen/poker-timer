@@ -1,10 +1,12 @@
 body {
   background-color: #282b31;
+  height: 100vh;
 }
 
 h1 {
   font-family: 'Playfair Display', sans-serif;
   color: #abb2c0;
+  text-align: center;
 }
 
 h2 {
@@ -58,7 +60,7 @@ p {
 
 @media (max-width: 576px) {
   #tournament-name {
-    font-size: 34px !important;
+    font-size: 28px !important;
   }
 
   h2 {
@@ -84,13 +86,19 @@ p {
 }
 
 @media (max-width: 385px) {
-
-
   h2 {
-    font-size: 125px;
+    font-size: 140px;
   }
 
   hr {
     padding: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
