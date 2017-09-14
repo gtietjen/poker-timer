@@ -1,5 +1,3 @@
-// function to take in entire round and returns a $round DOM tree
-
 var rounds = [
   {
     name: 'Kaplan Tournament',
@@ -40,9 +38,9 @@ function renderRound(round) {
   $span.setAttribute('id', 'current-round')
   $span.textContent = round.roundNumber
 
-  $roundNumber.textContent = 'Round: ' + '$span'
-
-  // 2 children including text node and span
+  var $roundText = document.createTextNode('Round: ')
+  $roundNumber.appendChild($roundText)
+  $roundNumber.appendChild($span)
 
   var $timerContainer = document.createElement('div')
   $timerContainer.classList.add('col-md-12', 'text-center')
@@ -65,7 +63,7 @@ function renderRound(round) {
   $currentBlindInner.classList.add('col-md-12', 'text-center')
 
   var $blindsHeading = document.createElement('h5')
-  $blindsHeading.textContent = 'Round '
+  $blindsHeading.textContent = 'Blinds'
 
   var $currentBlinds = document.createElement('h3')
   $currentBlinds.setAttribute('id', 'current-blind')

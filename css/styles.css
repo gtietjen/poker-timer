@@ -58,6 +58,10 @@ p {
   font-size: 15px;
 }
 
+#play-button {
+  margin: 0 auto;
+}
+
 @media (min-width: 577px) {
   .container {
     position: relative;
