@@ -1,0 +1,122 @@
+body {
+  background-color: #282b31;
+  height: 100vh;
+}
+
+h1 {
+  font-family: 'Playfair Display', sans-serif;
+  color: #abb2c0;
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 200px;
+  font-weight: 500;
+  color: #abb2c0;
+}
+
+h3 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 80px;
+  font-weight: 500;
+  color: #abb2c0;
+}
+
+h4 {
+  font-family: 'Playfair Display', sans-serif;
+  color: #5c6371;
+  font-size: 30px;
+  font-style: italic;
+}
+
+h5 {
+  font-family: 'Playfair Display', sans-serif;
+  color: #abb2c0;
+  font-size: 36px;
+}
+
+h6 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 45px;
+  color: #abb2c0;
+}
+
+#tournament-name {
+  font-size: 32px !important;
+}
+
+hr {
+  width: 300px;
+  border-color: #5c6371;
+  padding: 10px 0;
+}
+
+p {
+  font-family: 'Playfair Display', sans-serif;
+  color: #abb2c0;
+  font-size: 15px;
+}
+
+#play-button {
+  margin: 0 auto;
+}
+
+@media (min-width: 577px) {
+  .container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #tournament-name {
+    font-size: 28px !important;
+  }
+
+  h2 {
+    font-size: 150px;
+  }
+
+  h3 {
+    font-size: 65px;
+  }
+
+  h4 {
+    font-size: 18px;
+    font-style: italic;
+  }
+
+  h5 {
+    font-size: 24px;
+  }
+
+  hr {
+    width: 200px;
+  }
+}
+
+@media (max-width: 385px) {
+  h2 {
+    font-size: 140px;
+  }
+
+  hr {
+    padding: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
