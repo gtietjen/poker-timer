@@ -1,8 +1,8 @@
 var rounds = [
   {
-    name: 'Kaplan Tournament',
+    name: 'Poker Tournament',
     roundNumber: 1,
-    time: '15:00',
+    time: 11,
     currentBlind: '5/10',
     nextBlind: '10/20'
   }
@@ -47,7 +47,7 @@ function renderRound(round) {
 
   var $timer = document.createElement('h2')
   $timer.setAttribute('id', 'timer')
-  $timer.textContent = round.time
+  $timer.textContent = round.time + ':00'
 
   $round.appendChild($roundContainer)
   $roundContainer.appendChild($hr1)
@@ -74,11 +74,24 @@ function renderRound(round) {
   $currentBlindInner.appendChild($blindsHeading)
   $currentBlindInner.appendChild($currentBlinds)
 
-  var $hr2 = document.createElement('hr')
   var $br2 = document.createElement('br')
 
+  var $playButtonRow = document.createElement('div')
+  $playButtonRow.classList.add('row')
+
+  var $playButtonContainer = document.createElement('div')
+  $playButtonContainer.classList.add('col-md-12')
+  $playButtonContainer.setAttribute('id', 'play-pause')
+
+  var $playButton = document.createElement('i')
+  $playButton.classList.add('material-icons')
+  $playButton.setAttribute('id', 'play-button')
+  $playButton.textContent = 'play_circle_filled'
+
   $round.appendChild($br1)
-  $round.appendChild($hr2)
+  $round.appendChild($playButtonRow)
+  $playButtonRow.appendChild($playButtonContainer)
+  $playButtonContainer.appendChild($playButton)
   $round.appendChild($br2)
 
   var $bottomContainer = document.createElement('div')
@@ -121,3 +134,35 @@ function displayMarkup() {
 }
 
 displayMarkup()
+
+var playButton = document.getElementById('play-button')
+
+function countdown(minutes) {
+  var seconds = 60
+  var mins = minutes
+  function tick() {
+    var timer = document.getElementById('timer')
+    var currentMinutes = minutes - 1
+    seconds--
+
+    if (seconds < 10) {
+      seconds = '0' + seconds
+    }
+
+    timer.textContent = currentMinutes + ':' + seconds
+
+    if (seconds > 0) {
+      setTimeout(tick, 1000)
+    }
+    else {
+      if (mins > 1) {
+        countdown(mins - 1)
+      }
+    }
+  }
+  tick()
+}
+
+playButton.addEventListener('click', function () {
+  countdown(rounds[0].time)
+})

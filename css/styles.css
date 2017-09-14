@@ -58,8 +58,17 @@ p {
   font-size: 15px;
 }
 
-#play-button {
-  margin: 0 auto;
+#play-pause {
+  text-align: center;
+}
+
+.material-icons {
+  font-size: 50px;
+  color: #97C475;
+}
+
+.material-icons:hover {
+  cursor: pointer;
 }
 
 @media (min-width: 577px) {
