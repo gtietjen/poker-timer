@@ -58,7 +58,21 @@ p {
   font-size: 15px;
 }
 
+@media (min-width: 577px) {
+  .container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
 @media (max-width: 576px) {
+  .container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
   #tournament-name {
     font-size: 28px !important;
   }
