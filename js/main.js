@@ -2,7 +2,7 @@ var rounds = [
   {
     name: 'Poker Tournament',
     roundNumber: 1,
-    time: 11,
+    time: 1,
     currentBlind: '5/10',
     nextBlind: '10/20'
   }
@@ -88,10 +88,17 @@ function renderRound(round) {
   $playButton.setAttribute('id', 'play-button')
   $playButton.textContent = 'play_circle_filled'
 
+  var $pauseButton = document.createElement('i')
+  $pauseButton.classList.add('material-icons', 'hidden')
+  $pauseButton.setAttribute('id', 'pause-button')
+  $pauseButton.textContent = 'pause_circle_filled'
+
   $round.appendChild($br1)
   $round.appendChild($playButtonRow)
   $playButtonRow.appendChild($playButtonContainer)
   $playButtonContainer.appendChild($playButton)
+  $playButtonContainer.appendChild($pauseButton)
+
   $round.appendChild($br2)
 
   var $bottomContainer = document.createElement('div')
@@ -136,6 +143,11 @@ function displayMarkup() {
 displayMarkup()
 
 var playButton = document.getElementById('play-button')
+var pauseButton = document.getElementById('pause-button')
+
+playButton.addEventListener('click', function () {
+  countdown(rounds[0].time)
+})
 
 function countdown(minutes) {
   var seconds = 60
@@ -161,8 +173,12 @@ function countdown(minutes) {
     }
   }
   tick()
-}
+  playButton.classList.add('hidden')
+  pauseButton.classList.remove('hidden')
 
-playButton.addEventListener('click', function () {
-  countdown(rounds[0].time)
-})
+  pauseButton.addEventListener('click', function () {
+    clearInterval(tick)
+    playButton.classList.remove('hidden')
+    pauseButton.classList.add('hidden')
+  })
+}

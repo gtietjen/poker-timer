@@ -64,11 +64,22 @@ p {
 
 .material-icons {
   font-size: 50px;
-  color: #97C475;
 }
 
 .material-icons:hover {
   cursor: pointer;
+}
+
+#play-button {
+  color: #97c475;
+}
+
+#pause-button {
+  color: #5c6371;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (min-width: 577px) {
