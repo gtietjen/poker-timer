@@ -74,6 +74,27 @@ p {
   color: #97c475;
 }
 
+#settings-container {
+  position: relative;
+}
+
+#settings-button {
+  color: #5c6371;
+  position: absolute;
+  float: right;
+  margin-top: -15px;
+}
+
+#settings {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#settings-close {
+  display: flex;
+  justify-content: flex-end;
+}
+
 #pause-button {
   color: #5c6371;
 }
