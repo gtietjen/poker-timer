@@ -2,7 +2,7 @@ var rounds = [
   {
     name: 'Poker Tournament',
     roundNumber: 1,
-    time: 1,
+    time: 15,
     currentBlind: '5/10',
     nextBlind: '10/20'
   }
@@ -145,40 +145,43 @@ displayMarkup()
 var playButton = document.getElementById('play-button')
 var pauseButton = document.getElementById('pause-button')
 
-playButton.addEventListener('click', function () {
-  countdown(rounds[0].time)
-})
+var timerId = null
 
-function countdown(minutes) {
-  var seconds = 60
-  var mins = minutes
-  function tick() {
-    var timer = document.getElementById('timer')
-    var currentMinutes = minutes - 1
-    seconds--
+var seconds = 60
+var minutes = rounds[0].time - 1
+var timer = document.getElementById('timer')
 
-    if (seconds < 10) {
-      seconds = '0' + seconds
-    }
-
-    timer.textContent = currentMinutes + ':' + seconds
-
-    if (seconds > 0) {
-      setTimeout(tick, 1000)
-    }
-    else {
-      if (mins > 1) {
-        countdown(mins - 1)
-      }
-    }
+function counter() {
+  seconds = seconds - 1
+  if (seconds === 0) {
+    seconds = 60
+    minutes--
   }
-  tick()
+
+  timer.textContent = minutes + ':' + seconds
   playButton.classList.add('hidden')
   pauseButton.classList.remove('hidden')
 
-  pauseButton.addEventListener('click', function () {
-    clearInterval(tick)
-    playButton.classList.remove('hidden')
-    pauseButton.classList.add('hidden')
-  })
+  if (seconds < 10) {
+    timer.textContent = minutes + ':' + '0' + seconds
+  }
+  if (seconds === 60) {
+    timer.textContent = (minutes + 1) + ':' + '00'
+  }
 }
+
+function stop() {
+  clearInterval(timerId)
+}
+
+playButton.addEventListener('click', function () {
+  timerId = setInterval(function () {
+    counter()
+  }, 1000)
+})
+
+pauseButton.addEventListener('click', function () {
+  stop()
+  playButton.classList.remove('hidden')
+  pauseButton.classList.add('hidden')
+})
