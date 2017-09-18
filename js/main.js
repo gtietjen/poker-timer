@@ -1,8 +1,8 @@
 var rounds = [
   {
-    name: 'Kaplan Tournament',
+    name: 'Poker Tournament',
     roundNumber: 1,
-    time: '15:00',
+    time: 1,
     currentBlind: '5/10',
     nextBlind: '10/20'
   }
@@ -18,6 +18,27 @@ function renderRound(round) {
   var $name = document.createElement('h1')
   $name.setAttribute('id', 'tournament-name')
   $name.textContent = round.name
+
+  var $settingsContainer = document.createElement('div')
+  $settingsContainer.setAttribute('id', 'settings-container')
+
+  var $settings = document.createElement('div')
+  $settings.setAttribute('id', 'settings')
+
+  var $settingsButton = document.createElement('i')
+  $settingsButton.setAttribute('id', 'settings-button')
+  $settingsButton.classList.add('material-icons')
+  $settingsButton.textContent = 'more_horiz'
+
+  var $settingsClose = document.createElement('i')
+  $settingsButton.setAttribute('id', 'settings-close')
+  $settingsButton.classList.add('material-icons', 'hidden')
+  $settingsButton.textContent = 'cancel'
+
+  $round.appendChild($settingsContainer)
+  $settingsContainer.appendChild($settings)
+  $settings.appendChild($settingsButton)
+  $settings.appendChild($settingsClose)
 
   $round.appendChild($nameContainer)
   $nameContainer.appendChild($name)
@@ -47,7 +68,7 @@ function renderRound(round) {
 
   var $timer = document.createElement('h2')
   $timer.setAttribute('id', 'timer')
-  $timer.textContent = round.time
+  $timer.textContent = round.time + ':00'
 
   $round.appendChild($roundContainer)
   $roundContainer.appendChild($hr1)
@@ -74,11 +95,31 @@ function renderRound(round) {
   $currentBlindInner.appendChild($blindsHeading)
   $currentBlindInner.appendChild($currentBlinds)
 
-  var $hr2 = document.createElement('hr')
   var $br2 = document.createElement('br')
 
+  var $playButtonRow = document.createElement('div')
+  $playButtonRow.classList.add('row')
+
+  var $playButtonContainer = document.createElement('div')
+  $playButtonContainer.classList.add('col-md-12')
+  $playButtonContainer.setAttribute('id', 'play-pause')
+
+  var $playButton = document.createElement('i')
+  $playButton.classList.add('material-icons')
+  $playButton.setAttribute('id', 'play-button')
+  $playButton.textContent = 'play_circle_filled'
+
+  var $pauseButton = document.createElement('i')
+  $pauseButton.classList.add('material-icons', 'hidden')
+  $pauseButton.setAttribute('id', 'pause-button')
+  $pauseButton.textContent = 'pause_circle_filled'
+
   $round.appendChild($br1)
-  $round.appendChild($hr2)
+  $round.appendChild($playButtonRow)
+  $playButtonRow.appendChild($playButtonContainer)
+  $playButtonContainer.appendChild($playButton)
+  $playButtonContainer.appendChild($pauseButton)
+
   $round.appendChild($br2)
 
   var $bottomContainer = document.createElement('div')
@@ -121,3 +162,64 @@ function displayMarkup() {
 }
 
 displayMarkup()
+
+var playButton = document.getElementById('play-button')
+var pauseButton = document.getElementById('pause-button')
+var settingsButton = document.getElementById('settings')
+var settingsClose = document.getElementById('settings-close')
+
+settingsButton.addEventListener('click', function () {
+  settingsButton.classList.add('hidden')
+  settingsClose.classList.remove('hidden')
+})
+
+settingsClose.addEventListener('click', function () {
+  settingsButton.classList.remove('hidden')
+  settingsClose.classList.add('hidden')
+})
+
+var timerId = null
+
+var seconds = 60
+var minutes = rounds[0].time - 1
+var timer = document.getElementById('timer')
+
+function counter() {
+
+  seconds = seconds - 1
+  if (seconds === -1) {
+    seconds = 60
+    minutes--
+  }
+
+  timer.textContent = minutes + ':' + seconds
+  playButton.classList.add('hidden')
+  pauseButton.classList.remove('hidden')
+
+  if (seconds < 10) {
+    timer.textContent = minutes + ':' + '0' + seconds
+  }
+  if (seconds === 60) {
+    timer.textContent = (minutes + 1) + ':' + '00'
+  }
+
+  if (seconds === 0 && minutes === 0) {
+    stop()
+  }
+}
+
+function stop() {
+  clearInterval(timerId)
+}
+
+playButton.addEventListener('click', function () {
+  timerId = setInterval(function () {
+    counter()
+  }, 1000)
+})
+
+pauseButton.addEventListener('click', function () {
+  stop()
+  playButton.classList.remove('hidden')
+  pauseButton.classList.add('hidden')
+})
