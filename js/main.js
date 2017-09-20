@@ -3,9 +3,10 @@ var rounds = [
   {
     name: 'Poker Tournament',
     roundNumber: 1,
-    time: 1,
+    time: 15,
     currentBlind: '5/10',
-    nextBlind: '10/20'
+    nextBlind: '10/20',
+    players: 20
   }
 ]
 
@@ -140,9 +141,13 @@ function renderRound(round, blind) {
   $currentBlindInner.appendChild($currentBlinds)
 
   var $br2 = document.createElement('br')
+  var $playPauseHr1 = document.createElement('hr')
+  $playPauseHr1.classList.add('play-pause-hr')
+  var $playPauseHr2 = document.createElement('hr')
+  $playPauseHr2.classList.add('play-pause-hr')
 
   var $playButtonRow = document.createElement('div')
-  $playButtonRow.classList.add('row')
+  $playButtonRow.classList.add('row', 'play-pause-container')
 
   var $playButtonContainer = document.createElement('div')
   $playButtonContainer.classList.add('col-md-12')
@@ -160,9 +165,11 @@ function renderRound(round, blind) {
 
   $round.appendChild($br1)
   $round.appendChild($playButtonRow)
+  $playButtonRow.appendChild($playPauseHr1)
   $playButtonRow.appendChild($playButtonContainer)
   $playButtonContainer.appendChild($playButton)
   $playButtonContainer.appendChild($pauseButton)
+  $playButtonRow.appendChild($playPauseHr2)
 
   $round.appendChild($br2)
 
@@ -192,11 +199,27 @@ function renderRound(round, blind) {
 
   var $playersRemaining = document.createElement('h6')
   $playersRemaining.setAttribute('id', 'players-remaining')
-  $playersRemaining.textContent = '20'
+  $playersRemaining.textContent = rounds[0].players
+
+  var $playersRemainingContainer = document.createElement('div')
+  $playersRemainingContainer.classList.add('players-remaining')
+
+  var $playerAdd = document.createElement('i')
+  $playerAdd.setAttribute('id', 'player-add')
+  $playerAdd.classList.add('material-icons')
+  $playerAdd.textContent = 'add_circle'
+
+  var $playerRemove = document.createElement('i')
+  $playerRemove.setAttribute('id', 'player-remove')
+  $playerRemove.classList.add('material-icons')
+  $playerRemove.textContent = 'remove_circle'
 
   $bottomContainer.appendChild($playersContainer)
   $playersContainer.appendChild($playersTitle)
-  $playersContainer.appendChild($playersRemaining)
+  $playersContainer.appendChild($playersRemainingContainer)
+  $playersRemainingContainer.appendChild($playerAdd)
+  $playersRemainingContainer.appendChild($playersRemaining)
+  $playersRemainingContainer.appendChild($playerRemove)
 
   return $round
 }
@@ -214,6 +237,9 @@ var settingsClose = document.getElementById('settings-close')
 var currentBlind = document.getElementById('current-blind')
 var nextBlind = document.getElementById('next-blind')
 var roundNumber = document.getElementById('current-round')
+var playerAdd = document.getElementById('player-add')
+var playerRemove = document.getElementById('player-remove')
+var playersRemaining = document.getElementById('players-remaining')
 
 var timerId = null
 
@@ -288,4 +314,16 @@ settingsButton.addEventListener('click', function () {
 settingsClose.addEventListener('click', function () {
   settingsButton.classList.remove('hidden')
   settingsClose.classList.add('hidden')
+})
+
+playerAdd.addEventListener('click', function () {
+  rounds[0].players++
+  playersRemaining.textContent = rounds[0].players
+})
+
+playerRemove.addEventListener('click', function () {
+  if (rounds[0].players > 0) {
+    rounds[0].players--
+    playersRemaining.textContent = rounds[0].players
+  }
 })

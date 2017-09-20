@@ -75,14 +75,14 @@ p {
   padding-top: 10px;
 }
 
-.form h5 {
-  font-size: 16px;
+.play-pause-container {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
 }
 
-.settings-page {
-  width: 100vw !important;
-  position: fixed !important;
-  top: 115px !important;
+.play-pause-hr {
+  width: 30%;
 }
 
 #play-pause {
@@ -126,6 +126,29 @@ p {
 
 #pause-button {
   color: #5c6371;
+}
+
+#next-blind {
+  padding-top: 10px;
+}
+
+.players-remaining {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.players-remaining i {
+  font-size: 28px;
+}
+
+#player-add {
+  color: #97c475;
+}
+
+#player-remove {
+  color: #e26b73;
 }
 
 .hidden {
@@ -205,5 +228,9 @@ p {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  .test-hr {
+    display: none;
   }
 }
