@@ -4,8 +4,6 @@ var rounds = [
     name: 'Poker Tournament',
     roundNumber: 1,
     time: 15,
-    currentBlind: '5/10',
-    nextBlind: '10/20',
     players: 20
   }
 ]

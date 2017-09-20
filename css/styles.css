@@ -230,7 +230,7 @@ p {
     transform: translateY(-50%);
   }
 
-  .test-hr {
+  .play-pause-hr {
     display: none;
   }
 }
