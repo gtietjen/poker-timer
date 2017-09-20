@@ -207,15 +207,13 @@ function displayMarkup() {
 
 displayMarkup()
 
-var round = document.getElementById('round')
 var playButton = document.getElementById('play-button')
 var pauseButton = document.getElementById('pause-button')
 var settingsButton = document.getElementById('settings-button')
 var settingsClose = document.getElementById('settings-close')
-// var settingsHeader = document.getElementById('settings-header')
-// var blindsSettings = document.getElementById('blinds-settings')
 var currentBlind = document.getElementById('current-blind')
 var nextBlind = document.getElementById('next-blind')
+var roundNumber = document.getElementById('current-round')
 
 var timerId = null
 
@@ -245,6 +243,7 @@ function counter() {
 
   if (seconds === 0 && minutes === 0) {
     stop()
+    advanceRound()
     settingsButton.classList.remove('hidden')
   }
 }
@@ -275,6 +274,8 @@ function advanceRound() {
   seconds = 60
   minutes = rounds[0].time - 1
   timer = document.getElementById('timer')
+  rounds[0].roundNumber++
+  roundNumber.textContent = rounds[0].roundNumber
   timer.textContent = rounds[0].time + ':00'
   playButton.classList.remove('hidden')
   pauseButton.classList.add('hidden')
