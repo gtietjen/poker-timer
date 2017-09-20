@@ -103,13 +103,14 @@ p {
 
 #settings-container {
   position: relative;
+  padding-right: 30px;
+  padding-top: 20px;
 }
 
 #settings-button {
   color: #5c6371;
   position: absolute;
   float: right;
-  margin-top: -15px;
 }
 
 #settings-close {
