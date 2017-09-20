@@ -36,6 +36,12 @@ h5 {
   font-size: 36px;
 }
 
+div select .h5 {
+  font-family: 'Playfair Display', sans-serif;
+  color: #abb2c0 !important;
+  font-size: 36px;
+}
+
 h6 {
   font-family: 'Quicksand', sans-serif;
   font-size: 45px;
@@ -56,6 +62,27 @@ p {
   font-family: 'Playfair Display', sans-serif;
   color: #abb2c0;
   font-size: 15px;
+}
+
+.form {
+  padding: 20px 0;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.blinds {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.play-pause-container {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.play-pause-hr {
+  width: 30%;
 }
 
 #play-pause {
@@ -85,12 +112,14 @@ p {
   margin-top: -15px;
 }
 
-#settings {
-  display: flex;
-  justify-content: flex-end;
+#settings-close {
+  color: #5c6371;
+  position: absolute;
+  float: right;
+  margin-top: -15px;
 }
 
-#settings-close {
+#settings {
   display: flex;
   justify-content: flex-end;
 }
@@ -99,8 +128,48 @@ p {
   color: #5c6371;
 }
 
+#next-blind {
+  padding-top: 10px;
+}
+
+.players-remaining {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.players-remaining i {
+  font-size: 28px;
+}
+
+#player-add {
+  color: #97c475;
+}
+
+#player-remove {
+  color: #e26b73;
+}
+
 .hidden {
   display: none;
+}
+
+.round-time {
+  text-align: center;
+}
+
+.list-group-item {
+  background-color: #282b31 !important;
+  color: #abb2c0;
+  font-family: 'Playfair Display', sans-serif;
+  border: 0;
+}
+
+.btn-default {
+  font-family: 'Playfair Display', sans-serif;
+  color: #abb2c0;
+  background-color: #282b31;
 }
 
 @media (min-width: 577px) {
@@ -159,5 +228,9 @@ p {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  .test-hr {
+    display: none;
   }
 }
