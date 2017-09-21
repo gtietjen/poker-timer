@@ -10,9 +10,6 @@ var rounds = [
 
 var blinds = [
   {
-    blind: '5/10'
-  },
-  {
     blind: '10/20'
   },
   {
@@ -20,12 +17,6 @@ var blinds = [
   },
   {
     blind: '25/50'
-  },
-  {
-    blind: '30/60'
-  },
-  {
-    blind: '40/80'
   },
   {
     blind: '50/100'
@@ -47,12 +38,15 @@ var blinds = [
   },
   {
     blind: '500/1000'
+  },
+  {
+    blind: '1000/2000'
   }
 ]
 
 function renderRound(round, blind) {
   var $round = document.createElement('div')
-  $round.classList.add('container', 'vertical-center')
+  $round.classList.add('container', 'vertical-center', 'hidden')
   $round.setAttribute('id', 'round')
 
   var $nameContainer = document.createElement('div')
@@ -68,10 +62,10 @@ function renderRound(round, blind) {
   var $settings = document.createElement('div')
   $settings.setAttribute('id', 'settings')
 
-  var $settingsButton = document.createElement('i')
-  $settingsButton.setAttribute('id', 'settings-button')
-  $settingsButton.classList.add('material-icons', 'hidden')
-  $settingsButton.textContent = 'chevron_right'
+  var $nextRoundButton = document.createElement('i')
+  $nextRoundButton.setAttribute('id', 'next-round-button')
+  $nextRoundButton.classList.add('material-icons', 'hidden')
+  $nextRoundButton.textContent = 'chevron_right'
 
   var $settingsClose = document.createElement('i')
   $settingsClose.setAttribute('id', 'settings-close')
@@ -80,7 +74,7 @@ function renderRound(round, blind) {
 
   $round.appendChild($settingsContainer)
   $settingsContainer.appendChild($settings)
-  $settings.appendChild($settingsButton)
+  $settings.appendChild($nextRoundButton)
   $settings.appendChild($settingsClose)
 
   $round.appendChild($nameContainer)
@@ -230,7 +224,7 @@ displayMarkup()
 
 var playButton = document.getElementById('play-button')
 var pauseButton = document.getElementById('pause-button')
-var settingsButton = document.getElementById('settings-button')
+var nextRoundButton = document.getElementById('next-round-button')
 var settingsClose = document.getElementById('settings-close')
 var currentBlind = document.getElementById('current-blind')
 var nextBlind = document.getElementById('next-blind')
@@ -256,7 +250,7 @@ function counter() {
   timer.textContent = minutes + ':' + seconds
   playButton.classList.add('hidden')
   pauseButton.classList.remove('hidden')
-  settingsButton.classList.add('hidden')
+  nextRoundButton.classList.add('hidden')
 
   if (seconds < 10) {
     timer.textContent = minutes + ':' + '0' + seconds
@@ -268,13 +262,13 @@ function counter() {
   if (seconds === 0 && minutes === 0) {
     stop()
     advanceRound()
-    settingsButton.classList.remove('hidden')
+    nextRoundButton.classList.remove('hidden')
   }
 }
 
 function stop() {
   clearInterval(timerId)
-  settingsButton.classList.remove('hidden')
+  nextRoundButton.classList.remove('hidden')
 }
 
 playButton.addEventListener('click', function () {
@@ -305,12 +299,12 @@ function advanceRound() {
   pauseButton.classList.add('hidden')
 }
 
-settingsButton.addEventListener('click', function () {
+nextRoundButton.addEventListener('click', function () {
   advanceRound()
 })
 
 settingsClose.addEventListener('click', function () {
-  settingsButton.classList.remove('hidden')
+  nextRoundButton.classList.remove('hidden')
   settingsClose.classList.add('hidden')
 })
 
@@ -325,3 +319,31 @@ playerRemove.addEventListener('click', function () {
     playersRemaining.textContent = rounds[0].players
   }
 })
+
+var tableBody = document.getElementById('blinds')
+
+function renderLevels(allBlinds) {
+  for (var i = 0; i < allBlinds.length; i++) {
+    var tr = document.createElement('tr')
+    var td = document.createElement('td')
+    var td2 = document.createElement('td')
+    td2.textContent = i + 1
+    td.appendChild(document.createTextNode(allBlinds[i].blind))
+    tr.appendChild(td2)
+    tr.appendChild(td)
+  }
+  return tr
+}
+// tableBody.appendChild(renderLevels(blinds))
+
+// Create a function for creating one tr/td element
+// Create additional function that will loop through blinds.length and call the function for creating tr/td
+
+// function renderLevel() {
+//   var tr = document.createElement('tr')
+//   var td = document.createElement('td')
+//   var td2 = document.createElement('td')
+//   tr.appendChild(td2)
+//   tr.appendChild(td)
+//   return tr
+// }

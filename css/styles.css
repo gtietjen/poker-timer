@@ -28,6 +28,7 @@ h4 {
   color: #5c6371;
   font-size: 30px;
   font-style: italic;
+  text-align: center;
 }
 
 h5 {
@@ -62,6 +63,33 @@ p {
   font-family: 'Playfair Display', sans-serif;
   color: #abb2c0;
   font-size: 15px;
+}
+
+th {
+  font-family: 'Playfair Display', sans-serif;
+  color: #abb2c0 !important;
+  font-size: 24px;
+  text-align: center;
+}
+
+td {
+  font-family: 'Playfair Display', sans-serif;
+  color: #abb2c0 !important;
+  font-size: 20px;
+  border: none !important;
+}
+
+tr {
+  text-align: center;
+}
+
+#levels {
+  display: flex;
+  justify-content: center;
+}
+
+#levels-title {
+  text-align: center;
 }
 
 .form {
