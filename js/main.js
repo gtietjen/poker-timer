@@ -1,7 +1,7 @@
 
 var rounds = [
   {
-    name: 'Poker Tournament',
+    name: ' Tournament Timer',
     roundNumber: 1,
     time: 15,
     players: 20
@@ -38,23 +38,26 @@ var blinds = [
   },
   {
     blind: '500/1000'
-  },
-  {
-    blind: '1000/2000'
   }
 ]
 
 function renderRound(round, blind) {
   var $round = document.createElement('div')
-  $round.classList.add('container', 'vertical-center', 'hidden')
+  $round.classList.add('container', 'vertical-center')
   $round.setAttribute('id', 'round')
 
   var $nameContainer = document.createElement('div')
   $nameContainer.classList.add('row')
 
+  var $infoIcon = document.createElement('i')
+  $infoIcon.classList.add('material-icons')
+  $infoIcon.setAttribute('id', 'info')
+  $infoIcon.textContent = 'info'
+
   var $name = document.createElement('h1')
   $name.setAttribute('id', 'tournament-name')
-  $name.textContent = round.name
+  $name.textContent = round.name + ' '
+  $name.appendChild($infoIcon)
 
   var $settingsContainer = document.createElement('div')
   $settingsContainer.setAttribute('id', 'settings-container')
@@ -67,15 +70,9 @@ function renderRound(round, blind) {
   $nextRoundButton.classList.add('material-icons', 'hidden')
   $nextRoundButton.textContent = 'chevron_right'
 
-  var $settingsClose = document.createElement('i')
-  $settingsClose.setAttribute('id', 'settings-close')
-  $settingsClose.classList.add('material-icons', 'hidden')
-  $settingsClose.textContent = 'cancel'
-
   $round.appendChild($settingsContainer)
   $settingsContainer.appendChild($settings)
   $settings.appendChild($nextRoundButton)
-  $settings.appendChild($settingsClose)
 
   $round.appendChild($nameContainer)
   $nameContainer.appendChild($name)
@@ -225,13 +222,14 @@ displayMarkup()
 var playButton = document.getElementById('play-button')
 var pauseButton = document.getElementById('pause-button')
 var nextRoundButton = document.getElementById('next-round-button')
-var settingsClose = document.getElementById('settings-close')
 var currentBlind = document.getElementById('current-blind')
 var nextBlind = document.getElementById('next-blind')
 var roundNumber = document.getElementById('current-round')
 var playerAdd = document.getElementById('player-add')
 var playerRemove = document.getElementById('player-remove')
 var playersRemaining = document.getElementById('players-remaining')
+var info = document.getElementById('info')
+var infoClose = document.getElementById('info-close')
 
 var timerId = null
 
@@ -283,6 +281,20 @@ pauseButton.addEventListener('click', function () {
   pauseButton.classList.add('hidden')
 })
 
+info.addEventListener('click', function () {
+  var round = document.getElementById('round')
+  var table = document.getElementById('levels')
+  round.classList.add('hidden')
+  table.classList.remove('hidden')
+})
+
+infoClose.addEventListener('click', function () {
+  var round = document.getElementById('round')
+  var table = document.getElementById('levels')
+  round.classList.remove('hidden')
+  table.classList.add('hidden')
+})
+
 function advanceRound() {
   blinds.splice(0, 1)
   currentBlind.textContent = blinds[0].blind
@@ -303,11 +315,6 @@ nextRoundButton.addEventListener('click', function () {
   advanceRound()
 })
 
-settingsClose.addEventListener('click', function () {
-  nextRoundButton.classList.remove('hidden')
-  settingsClose.classList.add('hidden')
-})
-
 playerAdd.addEventListener('click', function () {
   rounds[0].players++
   playersRemaining.textContent = rounds[0].players
@@ -322,28 +329,17 @@ playerRemove.addEventListener('click', function () {
 
 var tableBody = document.getElementById('blinds')
 
-function renderLevels(allBlinds) {
-  for (var i = 0; i < allBlinds.length; i++) {
-    var tr = document.createElement('tr')
-    var td = document.createElement('td')
-    var td2 = document.createElement('td')
-    td2.textContent = i + 1
-    td.appendChild(document.createTextNode(allBlinds[i].blind))
-    tr.appendChild(td2)
-    tr.appendChild(td)
+function drawTable() {
+  var tr
+  var td
+  tbody = document.getElementById('blinds')
+  for (var i = 0; i < blinds.length; i++) {
+    tr = tbody.insertRow(tbody.rows.length)
+    td = tr.insertCell(tr.cells.length)
+    td.textContent = i + 1
+    td = tr.insertCell(tr.cells.length)
+    td.textContent = blinds[i].blind
   }
-  return tr
 }
-// tableBody.appendChild(renderLevels(blinds))
 
-// Create a function for creating one tr/td element
-// Create additional function that will loop through blinds.length and call the function for creating tr/td
-
-// function renderLevel() {
-//   var tr = document.createElement('tr')
-//   var td = document.createElement('td')
-//   var td2 = document.createElement('td')
-//   tr.appendChild(td2)
-//   tr.appendChild(td)
-//   return tr
-// }
+drawTable()

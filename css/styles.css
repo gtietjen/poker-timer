@@ -83,6 +83,11 @@ tr {
   text-align: center;
 }
 
+#info {
+  font-size: 25px;
+  color: #5c6371;
+}
+
 #levels {
   display: flex;
   justify-content: center;
@@ -129,28 +134,31 @@ tr {
   color: #97c475;
 }
 
-#settings-container {
+#round {
   position: relative;
-  padding-right: 30px;
-  padding-top: 20px;
+}
+
+#settings-container {
+  position: absolute;
+  /*padding-right: 30px;
+  padding-top: 20px;*/
+  float: right;
 }
 
 #settings-button {
   color: #5c6371;
-  position: absolute;
   float: right;
 }
 
-#settings-close {
+#info-close {
   color: #5c6371;
-  position: absolute;
-  float: right;
-  margin-top: -15px;
+  font-size: 25px;
 }
 
 #settings {
   display: flex;
   justify-content: flex-end;
+  position: relative;
 }
 
 #pause-button {
