@@ -327,12 +327,10 @@ playerRemove.addEventListener('click', function () {
   }
 })
 
-var tableBody = document.getElementById('blinds')
-
 function drawTable() {
   var tr
   var td
-  tbody = document.getElementById('blinds')
+  var tbody = document.getElementById('blinds')
   for (var i = 0; i < blinds.length; i++) {
     tr = tbody.insertRow(tbody.rows.length)
     td = tr.insertCell(tr.cells.length)
