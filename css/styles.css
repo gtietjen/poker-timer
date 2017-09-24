@@ -28,6 +28,7 @@ h4 {
   color: #5c6371;
   font-size: 30px;
   font-style: italic;
+  text-align: center;
 }
 
 h5 {
@@ -62,6 +63,38 @@ p {
   font-family: 'Playfair Display', sans-serif;
   color: #abb2c0;
   font-size: 15px;
+}
+
+th {
+  font-family: 'Playfair Display', sans-serif;
+  color: #abb2c0 !important;
+  font-size: 24px;
+  text-align: center;
+}
+
+td {
+  font-family: 'Playfair Display', sans-serif;
+  color: #abb2c0 !important;
+  font-size: 20px;
+  border: none !important;
+}
+
+tr {
+  text-align: center;
+}
+
+#info {
+  font-size: 25px;
+  color: #5c6371;
+}
+
+#levels {
+  display: flex;
+  justify-content: center;
+}
+
+#levels-title {
+  text-align: center;
 }
 
 .form {
@@ -101,27 +134,29 @@ p {
   color: #97c475;
 }
 
-#settings-container {
+#round {
   position: relative;
+}
+
+#settings-container {
+  position: absolute;
+  float: right;
 }
 
 #settings-button {
   color: #5c6371;
-  position: absolute;
   float: right;
-  margin-top: -15px;
 }
 
-#settings-close {
+#info-close {
   color: #5c6371;
-  position: absolute;
-  float: right;
-  margin-top: -15px;
+  font-size: 25px;
 }
 
 #settings {
   display: flex;
   justify-content: flex-end;
+  position: relative;
 }
 
 #pause-button {
@@ -230,7 +265,7 @@ p {
     transform: translateY(-50%);
   }
 
-  .test-hr {
+  .play-pause-hr {
     display: none;
   }
 }

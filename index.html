@@ -5,7 +5,9 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon-iphone.png"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i|Quicksand:400,500,700" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
@@ -14,9 +16,28 @@
 </head>
 
 <body>
+  <div class="container hidden" id="levels">
+    <div class="row" id="levels-container">
+      <div class="col-md-12">
+        <h5 id="levels-title">Blind Structure <i id="info-close" class="material-icons">cancel</i></h5>
+        <hr/>
+        <h4>Time per level: 10 minutes</h4>
+        <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Blinds</th>
+            </tr>
+          </thead>
+          <tbody id="blinds">
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
   <script src="js/main.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 
 </html>

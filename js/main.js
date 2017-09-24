@@ -1,19 +1,14 @@
 
 var rounds = [
   {
-    name: 'Poker Tournament',
+    name: ' Tournament Timer',
     roundNumber: 1,
     time: 15,
-    currentBlind: '5/10',
-    nextBlind: '10/20',
     players: 20
   }
 ]
 
 var blinds = [
-  {
-    blind: '5/10'
-  },
   {
     blind: '10/20'
   },
@@ -22,12 +17,6 @@ var blinds = [
   },
   {
     blind: '25/50'
-  },
-  {
-    blind: '30/60'
-  },
-  {
-    blind: '40/80'
   },
   {
     blind: '50/100'
@@ -60,9 +49,15 @@ function renderRound(round, blind) {
   var $nameContainer = document.createElement('div')
   $nameContainer.classList.add('row')
 
+  var $infoIcon = document.createElement('i')
+  $infoIcon.classList.add('material-icons')
+  $infoIcon.setAttribute('id', 'info')
+  $infoIcon.textContent = 'info'
+
   var $name = document.createElement('h1')
   $name.setAttribute('id', 'tournament-name')
-  $name.textContent = round.name
+  $name.textContent = round.name + ' '
+  $name.appendChild($infoIcon)
 
   var $settingsContainer = document.createElement('div')
   $settingsContainer.setAttribute('id', 'settings-container')
@@ -70,20 +65,14 @@ function renderRound(round, blind) {
   var $settings = document.createElement('div')
   $settings.setAttribute('id', 'settings')
 
-  var $settingsButton = document.createElement('i')
-  $settingsButton.setAttribute('id', 'settings-button')
-  $settingsButton.classList.add('material-icons', 'hidden')
-  $settingsButton.textContent = 'chevron_right'
-
-  var $settingsClose = document.createElement('i')
-  $settingsClose.setAttribute('id', 'settings-close')
-  $settingsClose.classList.add('material-icons', 'hidden')
-  $settingsClose.textContent = 'cancel'
+  var $nextRoundButton = document.createElement('i')
+  $nextRoundButton.setAttribute('id', 'next-round-button')
+  $nextRoundButton.classList.add('material-icons', 'hidden')
+  $nextRoundButton.textContent = 'chevron_right'
 
   $round.appendChild($settingsContainer)
   $settingsContainer.appendChild($settings)
-  $settings.appendChild($settingsButton)
-  $settings.appendChild($settingsClose)
+  $settings.appendChild($nextRoundButton)
 
   $round.appendChild($nameContainer)
   $nameContainer.appendChild($name)
@@ -232,14 +221,15 @@ displayMarkup()
 
 var playButton = document.getElementById('play-button')
 var pauseButton = document.getElementById('pause-button')
-var settingsButton = document.getElementById('settings-button')
-var settingsClose = document.getElementById('settings-close')
+var nextRoundButton = document.getElementById('next-round-button')
 var currentBlind = document.getElementById('current-blind')
 var nextBlind = document.getElementById('next-blind')
 var roundNumber = document.getElementById('current-round')
 var playerAdd = document.getElementById('player-add')
 var playerRemove = document.getElementById('player-remove')
 var playersRemaining = document.getElementById('players-remaining')
+var info = document.getElementById('info')
+var infoClose = document.getElementById('info-close')
 
 var timerId = null
 
@@ -258,7 +248,7 @@ function counter() {
   timer.textContent = minutes + ':' + seconds
   playButton.classList.add('hidden')
   pauseButton.classList.remove('hidden')
-  settingsButton.classList.add('hidden')
+  nextRoundButton.classList.add('hidden')
 
   if (seconds < 10) {
     timer.textContent = minutes + ':' + '0' + seconds
@@ -270,13 +260,13 @@ function counter() {
   if (seconds === 0 && minutes === 0) {
     stop()
     advanceRound()
-    settingsButton.classList.remove('hidden')
+    nextRoundButton.classList.remove('hidden')
   }
 }
 
 function stop() {
   clearInterval(timerId)
-  settingsButton.classList.remove('hidden')
+  nextRoundButton.classList.remove('hidden')
 }
 
 playButton.addEventListener('click', function () {
@@ -289,6 +279,20 @@ pauseButton.addEventListener('click', function () {
   stop()
   playButton.classList.remove('hidden')
   pauseButton.classList.add('hidden')
+})
+
+info.addEventListener('click', function () {
+  var round = document.getElementById('round')
+  var table = document.getElementById('levels')
+  round.classList.add('hidden')
+  table.classList.remove('hidden')
+})
+
+infoClose.addEventListener('click', function () {
+  var round = document.getElementById('round')
+  var table = document.getElementById('levels')
+  round.classList.remove('hidden')
+  table.classList.add('hidden')
 })
 
 function advanceRound() {
@@ -307,13 +311,8 @@ function advanceRound() {
   pauseButton.classList.add('hidden')
 }
 
-settingsButton.addEventListener('click', function () {
+nextRoundButton.addEventListener('click', function () {
   advanceRound()
-})
-
-settingsClose.addEventListener('click', function () {
-  settingsButton.classList.remove('hidden')
-  settingsClose.classList.add('hidden')
 })
 
 playerAdd.addEventListener('click', function () {
@@ -327,3 +326,18 @@ playerRemove.addEventListener('click', function () {
     playersRemaining.textContent = rounds[0].players
   }
 })
+
+function drawTable() {
+  var tr
+  var td
+  var tbody = document.getElementById('blinds')
+  for (var i = 0; i < blinds.length; i++) {
+    tr = tbody.insertRow(tbody.rows.length)
+    td = tr.insertCell(tr.cells.length)
+    td.textContent = i + 1
+    td = tr.insertCell(tr.cells.length)
+    td.textContent = blinds[i].blind
+  }
+}
+
+drawTable()
