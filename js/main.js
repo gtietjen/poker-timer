@@ -3,7 +3,7 @@ var rounds = [
   {
     name: ' Tournament Timer',
     roundNumber: 1,
-    time: 15,
+    time: 1,
     players: 20
   }
 ]
@@ -230,6 +230,7 @@ var playerRemove = document.getElementById('player-remove')
 var playersRemaining = document.getElementById('players-remaining')
 var info = document.getElementById('info')
 var infoClose = document.getElementById('info-close')
+var sound = document.getElementById('sound')
 
 var timerId = null
 
@@ -257,8 +258,13 @@ function counter() {
     timer.textContent = (minutes + 1) + ':' + '00'
   }
 
+  if (seconds === 30 && minutes === 0) {
+    sound.play()
+  }
+
   if (seconds === 0 && minutes === 0) {
     stop()
+    sound.play()
     advanceRound()
     nextRoundButton.classList.remove('hidden')
   }
